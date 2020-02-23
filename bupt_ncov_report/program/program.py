@@ -149,9 +149,13 @@ class Program:
         if success:
             msg = f'[bupt-ncov-report] <b>成功：</b>服务器的返回是：\n\n' \
                   f'<pre>{html.escape(res)}</pre>'
+            trans_msg = f'[bupt-ncov-report] 成功：服务器的返回是：\n\n' \
+                        f'{res}'
         else:
             msg = f'[bupt-ncov-report] <b>失败：</b>发生如下异常：\n\n' \
                   f'<pre>{html.escape(res)}</pre>'
+            trans_msg = f'[bupt-ncov-report] 失败：发生如下异常：\n\n' \
+                        f'{res}'
         logger.info(msg)
 
         if self._conf['TG_BOT_TOKEN'] is not None and self._conf['TG_CHAT_ID'] is not None:
@@ -159,11 +163,11 @@ class Program:
             success = tg.send_result()
 
         if self._conf['QQ_BOT_HOST'] and self._conf['QQ_BOT_TOKEN'] and self._conf['QQ_ID']:
-            qq = QQ(msg, self._conf, self._sess, logger, success)
+            qq = QQ(trans_msg, self._conf, self._sess, logger, success)
             success = qq.send_result()
 
         if self._conf['SERVER_CHAN_SC_KEY']:
-            wechat = WECHAT(msg, self._conf, self._sess, logger, success)
+            wechat = WECHAT(trans_msg, self._conf, self._sess, logger, success)
             success = wechat.send_result()
 
         if not success:

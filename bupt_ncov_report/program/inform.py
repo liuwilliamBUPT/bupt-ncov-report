@@ -94,7 +94,8 @@ class WECHAT(Inform):
             sc_res_raw = self._sess.post(
                 (f'https://sc.ftqq.com/' +
                  f'{self._conf["SERVER_CHAN_SC_KEY"]}.send?' +
-                 f'text={self._msg}'),
+                 f'text=疫情防控通填报结果&' +
+                 f'desp={self._msg}'),
                 timeout=TIMEOUT_SECOND
             )
 
