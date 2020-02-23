@@ -166,7 +166,7 @@ class Program:
             qq = QQ(trans_msg, self._conf, self._sess, logger, success)
             success = qq.send_result()
 
-        if self._conf['SERVER_CHAN_SC_KEY']:
+        if self._conf['SC_KEY']:
             wechat = WECHAT(trans_msg, self._conf, self._sess, logger, success)
             success = wechat.send_result()
 

@@ -59,10 +59,10 @@ CONFIG_SCHEMA: Dict[str, ConfigSchemaItem] = {
         default=None,
         type=str,
     ),
-    'SERVER_CHAN_SC_KEY': ConfigSchemaItem(
-        description='（可选）如果您需要把执行结果通过 Server_chan 告知，'
-                    '请设为您的 Server_chan 的 SC_KEY',
-        for_short='Server_Chan SECRET KEY',
+    'SC_KEY': ConfigSchemaItem(
+        description='（可选）如果您需要把执行结果通过 ServerChan 告知，'
+                    '请设为您的 ServerChan 的 SC_KEY',
+        for_short='ServerChan SECRET KEY',
         default=None,
         type=str,
     ),
