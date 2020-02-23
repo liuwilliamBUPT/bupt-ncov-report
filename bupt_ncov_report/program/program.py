@@ -14,7 +14,7 @@ import requests
 from ..constant import *
 from ..predef import *
 from ..program_utils import *
-from ..program import Inform
+from ..program import *
 
 logger = logging.getLogger(__name__)
 
@@ -154,8 +154,17 @@ class Program:
                   f'<pre>{html.escape(res)}</pre>'
         logger.info(msg)
 
-        inform = Inform(msg, self._conf, self._sess, logger)
-        success = inform.send_result()
+        if self._conf['TG_BOT_TOKEN'] is not None and self._conf['TG_CHAT_ID'] is not None:
+            tg = TG(msg, self._conf, self._sess, logger, success)
+            success = tg.send_result()
+
+        if self._conf['QQ_BOT_HOST'] and self._conf['QQ_BOT_TOKEN'] and self._conf['QQ_ID']:
+            qq = QQ(msg, self._conf, self._sess, logger, success)
+            success = qq.send_result()
+
+        if self._conf['SERVER_CHAN_SC_KEY']:
+            wechat = WECHAT(msg, self._conf, self._sess, logger, success)
+            success = wechat.send_result()
 
         if not success:
             self._exit_status = 1
