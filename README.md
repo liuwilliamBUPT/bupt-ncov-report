@@ -113,6 +113,10 @@ GCP 支持通过 `requirements.txt` 自动下载依赖项，因此将所有文�
 | TG_CHAT_ID     | --tg-chat-id     | （可选）如果您需要把执行结果通过 Telegram 机器人告知，请将此变量设为您自己的用户 id |
 | BNR_LOG_PATH   | --bnr-log-path   | （可选）日志文件存放的路径，未设置则不输出日志文件。（注意日志中可能有敏感信息） |
 | STOP_WHEN_SICK | --stop-when-sick | （可选）当检测到您上报的数据表明您为疑似病患时（如体温>=37°C、接触过确诊人群等），若您开启了此选项，将停止自动上报，以防止您连续多日上报异常数据。 |
+| QQ_BOT_HOST    | --qq-bot-host    | （可选）如果您需要把执行结果通过 QQ 机器人告知，请将此变量设为您的 Coolq 机器人的 HOST:PORT |
+| QQ_BOT_TOKEN   | --qq-bot-token   | （可选）如果您需要把执行结果通过 QQ 机器人告知，请将此变量设为您的 Coolq 机器人 TOKEN|
+| QQ_ID          | --qq-id          | （可选）如果您需要把执行结果通过 QQ 机器人告知，请将此变量设为您的 QQ |
+| SC_KEY         | --sc-key         | （可选）如果您需要把执行结果通过 SeverChan 告知，请将此变量设为您的 SCKEY |
 
 **注：** 优先级为：命令行参数 > 环境变量 > 代码中的默认值。其中前者覆盖后者。
 
