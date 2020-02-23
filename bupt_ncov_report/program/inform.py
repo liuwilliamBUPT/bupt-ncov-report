@@ -101,7 +101,7 @@ class WECHAT(Inform):
             sc_res = sc_res_raw.json()
             if 'errmsg' not in sc_res:
                 raise ValueError('ServerChan API 的返回值很奇怪。')
-            if not sc_res['errmsg'] != 'success':
+            if sc_res['errmsg'] != 'success':
                 raise ValueError(f'ServerChan API 调用失败，可能您的 Token 配置有误。'
                                  f'API 的返回是：\n{sc_res}')
 

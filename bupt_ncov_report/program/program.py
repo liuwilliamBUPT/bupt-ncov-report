@@ -14,7 +14,7 @@ import requests
 from ..constant import *
 from ..predef import *
 from ..program_utils import *
-from ..program import *
+from ..program.inform import *
 
 logger = logging.getLogger(__name__)
 
