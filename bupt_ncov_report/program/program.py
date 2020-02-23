@@ -14,6 +14,7 @@ import requests
 from ..constant import *
 from ..predef import *
 from ..program_utils import *
+from ..program import *
 
 logger = logging.getLogger(__name__)
 
@@ -153,31 +154,17 @@ class Program:
                   f'<pre>{html.escape(res)}</pre>'
         logger.info(msg)
 
-        # 如果用户指定了 Telegram 相关信息，就把消息通过 Telegram 发送给用户
         if self._conf['TG_BOT_TOKEN'] is not None and self._conf['TG_CHAT_ID'] is not None:
-            logger.info('将运行结果通过 Telegram 机器人发送。')
-            try:
-                tg_res_raw = self._sess.post(
-                    f'https://api.telegram.org/bot{self._conf["TG_BOT_TOKEN"]}/sendMessage',
-                    json={
-                        'chat_id': self._conf['TG_CHAT_ID'],
-                        'text': msg,
-                        'parse_mode': 'HTML',
-                    },
-                    timeout=TIMEOUT_SECOND
-                )
+            tg = TG(msg, self._conf, self._sess, logger, success)
+            success = tg.send_result()
 
-                tg_res = tg_res_raw.json()
-                if 'ok' not in tg_res:
-                    raise ValueError('Telegram API 的返回值很奇怪。')
-                if not tg_res['ok']:
-                    raise ValueError(f'Telegram API 调用失败，可能您的 Token 或 chat id 配置有误。'
-                                     f'API 的返回是：\n{tg_res}')
+        if self._conf['QQ_BOT_HOST'] and self._conf['QQ_BOT_TOKEN'] and self._conf['QQ_ID']:
+            qq = QQ(msg, self._conf, self._sess, logger, success)
+            success = qq.send_result()
 
-            except:
-                # 将 Telegram 机器人的错误也打印下来
-                logger.error('调用 Telegram API 时发生错误。', exc_info=True)
-                success = False
+        if self._conf['SERVER_CHAN_SC_KEY']:
+            wechat = WECHAT(msg, self._conf, self._sess, logger, success)
+            success = wechat.send_result()
 
         if not success:
             self._exit_status = 1

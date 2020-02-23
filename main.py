@@ -38,6 +38,34 @@ CONFIG_SCHEMA: Dict[str, ConfigSchemaItem] = {
         default=None,
         type=str,
     ),
+    'QQ_BOT_HOST': ConfigSchemaItem(
+        description='（可选）如果您需要把执行结果通过 QQ 机器人告知，'
+                    '请设为您的 Coolq 机器人的 HOST:PORT',
+        for_short='Coolq Host:port',
+        default=None,
+        type=str,
+    ),
+    'QQ_BOT_TOKEN': ConfigSchemaItem(
+        description='（可选）如果您需要把执行结果通过 QQ 机器人告知，并且设置了TOKEN，'
+                    '请设为您的 Coolq 机器人的 TOKEN',
+        for_short='Coolq TOKEN',
+        default=None,
+        type=str,
+    ),
+    'QQ_ID': ConfigSchemaItem(
+        description='（可选）如果您需要把执行结果通过 QQ 机器人告知，'
+                    '请设为您的 QQ 号',
+        for_short='QQ number',
+        default=None,
+        type=str,
+    ),
+    'SERVER_CHAN_SC_KEY': ConfigSchemaItem(
+        description='（可选）如果您需要把执行结果通过 Server_chan 告知，'
+                    '请设为您的 Server_chan 的 SC_KEY',
+        for_short='Server_Chan SECRET KEY',
+        default=None,
+        type=str,
+    ),
     'BNR_LOG_PATH': ConfigSchemaItem(
         description='（可选）日志文件存放的路径，未设置则不输出日志文件。（注意日志中可能有敏感信息）',
         for_short='路径',
